@@ -9,9 +9,23 @@ import numpy as np
 
 from ._enums import *
 
+logging.basicConfig(filename="log",
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.DEBUG)
+
 logger = logging.getLogger(__name__)
 
-CLASSPATH = os.environ.get("CLASSPATH", "OpenRocket-15.03.jar")
+
+import sys
+handler = logging.StreamHandler(sys.stdout)
+handler.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+CLASSPATH = r'C:\Program Files\OpenRocket\OpenRocket.jar'
 
 __all__ = [
     'OpenRocketInstance',
